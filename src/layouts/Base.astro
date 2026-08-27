@@ -1,6 +1,6 @@
 ---
 import { getMenu, getSiteSettings } from "emdash";
-import { EmDashHead } from "emdash/ui";
+import { EmDashHead, EmDashBodyStart, EmDashBodyEnd } from "emdash/ui";
 import { createPublicPageContext } from "emdash/page";
 import { Font } from "astro:assets";
 import "../styles/tokens.css";
@@ -72,6 +72,7 @@ const pageCtx = createPublicPageContext({
 		</script>
 	</head>
 	<body>
+		<EmDashBodyStart page={pageCtx} />
 		<header class="site-header">
 			<nav class="nav">
 				<a href="/" class="site-logo">
@@ -159,6 +160,8 @@ const pageCtx = createPublicPageContext({
 				</p>
 			</div>
 		</footer>
+
+		<EmDashBodyEnd page={pageCtx} />
 
 		<script>
 			// Theme switcher

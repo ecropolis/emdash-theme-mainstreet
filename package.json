@@ -18,14 +18,15 @@
     "label": "Mainstreet",
     "description": "For salons, studios, clinics, and local services: a services menu with pricing, team, hours, and booking CTAs",
     "seed": "seed/seed.json",
-    "preview": "https://mainstreet-site.warreng.workers.dev"
+    "preview": "https://mainstreet.superherotech.ai"
   },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "deploy": "astro build && wrangler deploy",
-    "typecheck": "astro check"
+    "typecheck": "astro check",
+    "deploy:demo": "DEMO_ATTRIBUTION=1 astro build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.0.0",

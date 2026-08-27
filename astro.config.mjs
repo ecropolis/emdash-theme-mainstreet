@@ -44,6 +44,19 @@ export default defineConfig({
 			database: d1({ binding: "DB", session: "auto" }),
 			storage: r2({ binding: "MEDIA" }),
 			plugins: [
+				// Demo-deployment-only attribution strip (see the plugin's
+				// header comment). Never registered for scaffolded sites —
+				// only the `deploy:demo` script sets DEMO_ATTRIBUTION=1.
+				...(process.env.DEMO_ATTRIBUTION === "1"
+					? [
+							{
+								id: "demo-attribution",
+								version: "0.1.0",
+								entrypoint: new URL("./src/plugins/demo-attribution/index.ts", import.meta.url).href,
+								capabilities: ["hooks.page-fragments:register"],
+							},
+						]
+					: []),
 				{
 					id: "service-blocks",
 					version: "0.1.0",

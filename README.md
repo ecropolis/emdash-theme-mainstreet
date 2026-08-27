@@ -2,7 +2,7 @@
 
 A theme for salons, spas, studios, clinics, trades, and anyone whose website exists to answer three questions: *what do you do, what does it cost, and how do I book?* Built with [EmDash](https://github.com/emdash-cms/emdash) and deployed on Cloudflare Workers with D1 and R2.
 
-**Live demo:** [mainstreet-site.warreng.workers.dev](https://mainstreet-site.warreng.workers.dev)
+**Live demo:** [mainstreet.superherotech.ai](https://mainstreet.superherotech.ai)
 
 **Create a site from this theme:**
 
