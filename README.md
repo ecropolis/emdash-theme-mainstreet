@@ -10,6 +10,8 @@ A theme for salons, spas, studios, clinics, trades, and anyone whose website exi
 npm create astro@latest -- --template github:ecropolis/emdash-theme-mainstreet
 ```
 
+Also published as [`@ecropolis/emdash-theme-mainstreet`](https://www.npmjs.com/package/@ecropolis/emdash-theme-mainstreet) on npm.
+
 Services are real content entries with pricing, duration, and images — not hand-edited page copy. Pages are assembled from purpose-built blocks: hero, services grid, how-it-works steps, testimonials, team, hours & contact, FAQ, and a booking CTA banner.
 
 ## What's included
