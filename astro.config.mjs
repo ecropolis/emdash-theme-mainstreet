@@ -54,8 +54,11 @@ export default defineConfig({
 				},
 				{
 					id: "compass-customizer",
-					version: "0.1.0",
+					version: "0.2.0",
 					entrypoint: new URL("./src/plugins/compass-customizer/index.ts", import.meta.url).href,
+					// React admin page (color pickers + live preview). Statically
+					// imported into the admin bundle via the plugin admin registry.
+					adminEntry: new URL("./src/plugins/compass-customizer/admin.tsx", import.meta.url).href,
 					// Trusted-only hook: injects the design-token override
 					// <style> into public pages.
 					capabilities: ["hooks.page-fragments:register"],

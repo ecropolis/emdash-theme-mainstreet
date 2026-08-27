@@ -268,6 +268,61 @@ const definition: PluginDefinition = {
 	},
 
 	routes: {
+		// JSON routes for the React admin page (admin.tsx). The Block Kit
+		// `admin` route below stays as the no-React fallback surface.
+		settings: {
+			handler: async (ctx: any) => {
+				const saved = await readSettings(ctx);
+				return {
+					settings: saved ?? DEFAULTS,
+					saved: saved !== null,
+					presets: PRESETS,
+					fonts: FONTS,
+				};
+			},
+		},
+
+		"settings/save": {
+			handler: async (ctx: any) => {
+				const v = (ctx.input ?? {}) as Record<string, unknown>;
+				const preset = String(v.preset ?? "custom");
+				const palette = PRESETS[preset];
+
+				const next: DesignSettings = {
+					preset,
+					brandLight: palette ? palette.brandLight : String(v.brandLight ?? "").trim(),
+					brandDark: palette ? palette.brandDark : String(v.brandDark ?? "").trim(),
+					accent: palette ? palette.accent : String(v.accent ?? "").trim(),
+					font: String(v.font || "default"),
+					radius: (["sharp", "soft", "round"].includes(String(v.radius)) ? v.radius : "soft") as DesignSettings["radius"],
+					displayWeight: String(v.displayWeight) === "800" ? "800" : "700",
+					gradients: v.gradients !== false,
+					customCss: String(v.customCss ?? ""),
+				};
+
+				for (const [field, value] of [
+					["Brand color (light)", next.brandLight],
+					["Brand color (dark)", next.brandDark],
+					["Accent color", next.accent],
+				] as const) {
+					if (!HEX_RE.test(value)) {
+						return { ok: false, error: `${field} must be a 6-digit hex value like #0f766e` };
+					}
+				}
+
+				await ctx.kv.set(KV_KEY, next);
+				ctx.log.info("Design settings saved (react)", { preset: next.preset });
+				return { ok: true, settings: next };
+			},
+		},
+
+		"settings/reset": {
+			handler: async (ctx: any) => {
+				await ctx.kv.delete(KV_KEY);
+				return { ok: true, settings: DEFAULTS };
+			},
+		},
+
 		admin: {
 			// Native-format route handlers take a single merged context:
 			// RouteContext extends PluginContext (input + kv + log + ...).
