@@ -15,7 +15,11 @@
 			"slug": "pages",
 			"label": "Pages",
 			"labelSingular": "Page",
-			"supports": ["drafts", "revisions", "seo"],
+			"supports": [
+				"drafts",
+				"revisions",
+				"seo"
+			],
 			"fields": [
 				{
 					"slug": "title",
@@ -36,7 +40,11 @@
 			"slug": "services",
 			"label": "Services",
 			"labelSingular": "Service",
-			"supports": ["drafts", "revisions", "seo"],
+			"supports": [
+				"drafts",
+				"revisions",
+				"seo"
+			],
 			"fields": [
 				{
 					"slug": "title",
@@ -88,7 +96,9 @@
 			"slug": "team",
 			"label": "Team",
 			"labelSingular": "Team Member",
-			"supports": ["drafts"],
+			"supports": [
+				"drafts"
+			],
 			"fields": [
 				{
 					"slug": "title",
@@ -125,34 +135,84 @@
 			"name": "primary",
 			"label": "Primary Navigation",
 			"items": [
-				{ "type": "custom", "label": "Services", "url": "/services" },
-				{ "type": "custom", "label": "About", "url": "/about" },
-				{ "type": "custom", "label": "Contact", "url": "/contact" }
+				{
+					"type": "custom",
+					"label": "Services",
+					"url": "/services"
+				},
+				{
+					"type": "custom",
+					"label": "About",
+					"url": "/about"
+				},
+				{
+					"type": "custom",
+					"label": "Contact",
+					"url": "/contact"
+				}
 			]
 		},
 		{
 			"name": "cta",
 			"label": "Header CTA (first item renders as the booking button)",
-			"items": [{ "type": "custom", "label": "Book a visit", "url": "/contact" }]
+			"items": [
+				{
+					"type": "custom",
+					"label": "Book a visit",
+					"url": "/contact"
+				}
+			]
 		},
 		{
 			"name": "footer_services",
 			"label": "Footer: Services",
 			"items": [
-				{ "type": "custom", "label": "Signature Massage", "url": "/services/signature-massage" },
-				{ "type": "custom", "label": "Deep Tissue Massage", "url": "/services/deep-tissue-massage" },
-				{ "type": "custom", "label": "Custom Facial", "url": "/services/custom-facial" },
-				{ "type": "custom", "label": "All services", "url": "/services" }
+				{
+					"type": "custom",
+					"label": "Signature Massage",
+					"url": "/services/signature-massage"
+				},
+				{
+					"type": "custom",
+					"label": "Deep Tissue Massage",
+					"url": "/services/deep-tissue-massage"
+				},
+				{
+					"type": "custom",
+					"label": "Custom Facial",
+					"url": "/services/custom-facial"
+				},
+				{
+					"type": "custom",
+					"label": "All services",
+					"url": "/services"
+				}
 			]
 		},
 		{
 			"name": "footer_studio",
 			"label": "Footer: Studio",
 			"items": [
-				{ "type": "custom", "label": "About", "url": "/about" },
-				{ "type": "custom", "label": "Our team", "url": "/about#team" },
-				{ "type": "custom", "label": "Hours & directions", "url": "/contact#visit" },
-				{ "type": "custom", "label": "Book a visit", "url": "/contact" }
+				{
+					"type": "custom",
+					"label": "About",
+					"url": "/about"
+				},
+				{
+					"type": "custom",
+					"label": "Our team",
+					"url": "/about#team"
+				},
+				{
+					"type": "custom",
+					"label": "Hours & directions",
+					"url": "/contact#visit"
+				},
+				{
+					"type": "custom",
+					"label": "Book a visit",
+					"url": "/contact"
+				}
 			]
 		}
 	],
@@ -324,7 +384,7 @@
 							"_type": "service.hero",
 							"_key": "contact-hero",
 							"headline": "Book a visit",
-							"subheadline": "Call or email and we'll find you a time — usually within the week. Online booking is coming soon.",
+							"subheadline": "Call, email, or use the form below — we reply within one business day.",
 							"centered": true
 						},
 						{
@@ -332,14 +392,32 @@
 							"_key": "visit",
 							"headline": "Hours & directions",
 							"hours": [
-								{ "label": "Mon – Fri", "value": "10am – 8pm" },
-								{ "label": "Saturday", "value": "9am – 6pm" },
-								{ "label": "Sunday", "value": "Closed" }
+								{
+									"label": "Mon – Fri",
+									"value": "10am – 8pm"
+								},
+								{
+									"label": "Saturday",
+									"value": "9am – 6pm"
+								},
+								{
+									"label": "Sunday",
+									"value": "Closed"
+								}
 							],
 							"phone": "(503) 555-0164",
 							"email": "hello@juniperandsage.example",
 							"address": "2117 SE Alder Street\nPortland, OR 97214",
 							"note": "Last appointments start one hour before close. Walk-ins are welcome when a room is free, but booking ahead is the safe bet."
+						},
+						{
+							"_type": "compass.form",
+							"_key": "contact-form",
+							"headline": "Or send a message",
+							"description": "We reply within one business day.",
+							"formKey": "contact",
+							"submitLabel": "Send message",
+							"successMessage": "Thanks — we'll get back to you within one business day."
 						},
 						{
 							"_type": "service.faq",
@@ -393,7 +471,12 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"children": [{ "_type": "span", "text": "Good to know" }]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Good to know"
+								}
+							]
 						},
 						{
 							"_type": "block",
@@ -440,7 +523,12 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"children": [{ "_type": "span", "text": "Good to know" }]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Good to know"
+								}
+							]
 						},
 						{
 							"_type": "block",
@@ -487,7 +575,12 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"children": [{ "_type": "span", "text": "Good to know" }]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Good to know"
+								}
+							]
 						},
 						{
 							"_type": "block",
@@ -534,7 +627,12 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"children": [{ "_type": "span", "text": "Good to know" }]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Good to know"
+								}
+							]
 						},
 						{
 							"_type": "block",
@@ -581,7 +679,12 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"children": [{ "_type": "span", "text": "Good to know" }]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Good to know"
+								}
+							]
 						},
 						{
 							"_type": "block",
@@ -628,7 +731,12 @@
 						{
 							"_type": "block",
 							"style": "h2",
-							"children": [{ "_type": "span", "text": "Good to know" }]
+							"children": [
+								{
+									"_type": "span",
+									"text": "Good to know"
+								}
+							]
 						},
 						{
 							"_type": "block",

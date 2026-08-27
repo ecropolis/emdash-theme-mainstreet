@@ -4,6 +4,7 @@ import { d1, r2 } from "@emdash-cms/cloudflare";
 import icon from "astro-iconset";
 import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
+import compassForms from "@ecropolis/emdash-plugin-compass-forms";
 
 export default defineConfig({
 	output: "server",
@@ -65,6 +66,7 @@ export default defineConfig({
 					// the virtual module has no on-disk location to anchor them).
 					entrypoint: new URL("./src/plugins/service-blocks/index.ts", import.meta.url).href,
 				},
+				compassForms(),
 				{
 					id: "compass-customizer",
 					version: "0.2.0",

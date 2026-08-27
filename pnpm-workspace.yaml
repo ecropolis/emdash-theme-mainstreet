@@ -15,4 +15,5 @@ minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - emdash
   - "@emdash-cms/*"
+  - "@ecropolis/*"
 blockExoticSubdeps: true
