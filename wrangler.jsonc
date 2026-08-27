@@ -8,6 +8,7 @@
 		{
 			"binding": "DB",
 			"database_name": "mainstreet-site",
+			"database_id": "137796ae-bcf5-4576-a67a-7fa1258be8e5",
 		},
 	],
 	"r2_buckets": [

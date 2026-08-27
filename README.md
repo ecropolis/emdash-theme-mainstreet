@@ -2,6 +2,14 @@
 
 A theme for salons, spas, studios, clinics, trades, and anyone whose website exists to answer three questions: *what do you do, what does it cost, and how do I book?* Built with [EmDash](https://github.com/emdash-cms/emdash) and deployed on Cloudflare Workers with D1 and R2.
 
+**Live demo:** [mainstreet-site.warreng.workers.dev](https://mainstreet-site.warreng.workers.dev)
+
+**Create a site from this theme:**
+
+```bash
+npm create astro@latest -- --template github:ecropolis/emdash-theme-mainstreet
+```
+
 Services are real content entries with pricing, duration, and images — not hand-edited page copy. Pages are assembled from purpose-built blocks: hero, services grid, how-it-works steps, testimonials, team, hours & contact, FAQ, and a booking CTA banner.
 
 ## What's included
