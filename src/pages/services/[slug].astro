@@ -1,0 +1,183 @@
+---
+import { getEmDashEntry } from "emdash";
+import { Icon } from "astro-iconset/components";
+import { Image, PortableText } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+
+const { slug } = Astro.params;
+const { entry: service, cacheHint } = await getEmDashEntry("services", slug!);
+
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+if (!service) {
+	return Astro.redirect("/404");
+}
+---
+
+<Base title={service.data.title} description={service.data.summary}>
+	<article class="service">
+		<div class="container service-layout">
+			<div class="service-main">
+				<a href="/services" class="service-back">
+					<Icon name="ph:arrow-left" aria-hidden="true" /> All services
+				</a>
+				<h1>{service.data.title}</h1>
+				{service.data.summary && <p class="service-lede">{service.data.summary}</p>}
+				<div class="service-chips">
+					{service.data.price_from && (
+						<span class="chip chip-price">{service.data.price_from}</span>
+					)}
+					{service.data.duration && (
+						<span class="chip">
+							<Icon name="ph:clock" aria-hidden="true" /> {service.data.duration}
+						</span>
+					)}
+				</div>
+				{service.data.content && (
+					<div class="service-content">
+						<PortableText value={service.data.content} />
+					</div>
+				)}
+			</div>
+			<aside class="service-side">
+				{service.data.image && <Image image={service.data.image} priority />}
+				<div class="service-book">
+					<h2>Ready when you are</h2>
+					<p>Reserve a time that suits you — it only takes a minute.</p>
+					<a href="/contact" class="btn btn-primary btn-lg">
+						<Icon name="ph:calendar-check" aria-hidden="true" /> Book this service
+					</a>
+				</div>
+			</aside>
+		</div>
+	</article>
+</Base>
+
+<style>
+	.service-layout {
+		display: grid;
+		grid-template-columns: 1fr 380px;
+		gap: var(--spacing-3xl);
+		padding-top: var(--spacing-3xl);
+		padding-bottom: var(--spacing-4xl);
+	}
+
+	.service-back {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--spacing-xs);
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+		color: var(--color-muted);
+		margin-bottom: var(--spacing-lg);
+		transition: color var(--transition-fast);
+	}
+
+	.service-back:hover {
+		color: var(--color-brand);
+	}
+
+	.service-main h1 {
+		font-size: var(--font-size-4xl);
+		letter-spacing: var(--tracking-tight);
+	}
+
+	.service-lede {
+		margin-top: var(--spacing-md);
+		font-size: var(--font-size-xl);
+		color: var(--color-muted);
+		line-height: var(--leading-normal);
+	}
+
+	.service-chips {
+		display: flex;
+		gap: var(--spacing-sm);
+		margin-top: var(--spacing-lg);
+		flex-wrap: wrap;
+	}
+
+	.chip {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--spacing-xs);
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+		padding: var(--spacing-xs) var(--spacing-md);
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-full);
+		color: var(--color-muted);
+	}
+
+	.chip-price {
+		color: var(--color-on-brand);
+		background: var(--gradient-brand);
+		border: none;
+	}
+
+	.service-content {
+		margin-top: var(--spacing-xl);
+		line-height: var(--leading-relaxed);
+	}
+
+	.service-content :global(h2) {
+		font-size: var(--font-size-2xl);
+		margin-top: var(--spacing-xl);
+		margin-bottom: var(--spacing-sm);
+	}
+
+	.service-content :global(p) {
+		margin-bottom: var(--spacing-md);
+	}
+
+	.service-content :global(ul),
+	.service-content :global(ol) {
+		margin: 0 0 var(--spacing-md) var(--spacing-lg);
+	}
+
+	.service-side {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-xl);
+	}
+
+	.service-side :global(img) {
+		width: 100%;
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.service-book {
+		padding: var(--spacing-xl);
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		text-align: center;
+	}
+
+	.service-book h2 {
+		font-size: var(--font-size-xl);
+	}
+
+	.service-book p {
+		margin-top: var(--spacing-sm);
+		margin-bottom: var(--spacing-lg);
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+	}
+
+	@media (max-width: 900px) {
+		.service-layout {
+			grid-template-columns: 1fr;
+		}
+
+		.service-side {
+			order: -1;
+		}
+
+		.service-side :global(img) {
+			max-height: 320px;
+			object-fit: cover;
+		}
+	}
+</style>

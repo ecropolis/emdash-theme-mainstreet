@@ -1,0 +1,174 @@
+---
+/**
+ * Services grid. The block itself carries only display options; the
+ * cards come from the `services` collection, so editors manage services
+ * as real content entries.
+ */
+import { getEmDashCollection } from "emdash";
+import { Image } from "emdash/ui";
+
+interface Props {
+	node: {
+		_key?: string;
+		headline?: string;
+		subheadline?: string;
+		limit?: number;
+		featuredOnly?: boolean;
+		ctaLabel?: string;
+		ctaUrl?: string;
+	};
+}
+
+const { node } = Astro.props;
+const { _key, headline, subheadline, featuredOnly } = node;
+
+const { entries: services, cacheHint } = await getEmDashCollection("services", {
+	status: "published",
+	orderBy: { sort_order: "asc" },
+	...(featuredOnly ? { where: { featured: true } } : {}),
+	...(node.limit ? { limit: node.limit } : {}),
+});
+
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+const cta =
+	node.ctaLabel && node.ctaUrl ? { label: node.ctaLabel, url: node.ctaUrl } : undefined;
+---
+
+<section class="services section" id={_key}>
+	<div class="container">
+		{(headline || subheadline) && (
+			<header class="section-header">
+				{headline && <h2 class="section-headline">{headline}</h2>}
+				{subheadline && <p class="section-subheadline">{subheadline}</p>}
+			</header>
+		)}
+		<div class="services-grid">
+			{services.map((service) => (
+				<a href={`/services/${service.id}`} class="service-card">
+					{service.data.image && (
+						<div class="service-image">
+							<Image image={service.data.image} />
+						</div>
+					)}
+					<div class="service-body">
+						{!!service.data.featured && <span class="service-flag">Popular</span>}
+						<h3 class="service-title">{service.data.title}</h3>
+						{service.data.summary && <p class="service-summary">{service.data.summary}</p>}
+						<div class="service-meta">
+							{service.data.price_from && <span class="service-price">{service.data.price_from}</span>}
+							{service.data.duration && <span class="service-duration">{service.data.duration}</span>}
+						</div>
+					</div>
+				</a>
+			))}
+		</div>
+		{cta && (
+			<div class="services-cta">
+				<a href={cta.url} class="btn btn-secondary">{cta.label}</a>
+			</div>
+		)}
+	</div>
+</section>
+
+<style>
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--spacing-xl);
+	}
+
+	.service-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+		transition:
+			transform var(--transition-base),
+			box-shadow var(--transition-base),
+			border-color var(--transition-base);
+	}
+
+	.service-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-lg);
+		border-color: var(--color-brand-soft);
+	}
+
+	.service-image :global(img) {
+		width: 100%;
+		aspect-ratio: 3 / 2;
+		object-fit: cover;
+	}
+
+	.service-body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-sm);
+		padding: var(--spacing-lg);
+		flex: 1;
+	}
+
+	.service-flag {
+		position: absolute;
+		top: var(--spacing-md);
+		right: var(--spacing-md);
+		font-size: var(--font-size-xs);
+		font-weight: 600;
+		color: var(--color-on-brand);
+		background: var(--gradient-brand);
+		padding: var(--spacing-xs) var(--spacing-sm);
+		border-radius: var(--radius-full);
+		box-shadow: var(--shadow);
+	}
+
+	.service-title {
+		font-size: var(--font-size-lg);
+	}
+
+	.service-summary {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		line-height: var(--leading-normal);
+		flex: 1;
+	}
+
+	.service-meta {
+		display: flex;
+		align-items: baseline;
+		gap: var(--spacing-md);
+		margin-top: var(--spacing-sm);
+	}
+
+	.service-price {
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--tracking-tight);
+		color: var(--color-brand);
+	}
+
+	.service-duration {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+	}
+
+	.services-cta {
+		text-align: center;
+		margin-top: var(--spacing-2xl);
+	}
+
+	@media (max-width: 900px) {
+		.services-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.services-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

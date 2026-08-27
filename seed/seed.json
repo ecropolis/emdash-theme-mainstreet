@@ -1,0 +1,704 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Mainstreet",
+		"description": "A service-business theme: services with pricing, team, hours, and booking CTAs",
+		"author": "Ecropolis"
+	},
+	"settings": {
+		"title": "Juniper & Sage",
+		"tagline": "A calmer hour in the middle of your week"
+	},
+	"collections": [
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"supports": ["drafts", "revisions", "seo"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				}
+			]
+		},
+		{
+			"slug": "services",
+			"label": "Services",
+			"labelSingular": "Service",
+			"supports": ["drafts", "revisions", "seo"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Name",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "summary",
+					"label": "Summary (one or two sentences, shown on cards)",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "content",
+					"label": "Description",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "image",
+					"label": "Image",
+					"type": "image"
+				},
+				{
+					"slug": "price_from",
+					"label": "Price (e.g. \"from $95\")",
+					"type": "string"
+				},
+				{
+					"slug": "duration",
+					"label": "Duration (e.g. \"60 min\")",
+					"type": "string"
+				},
+				{
+					"slug": "featured",
+					"label": "Featured (shows a Popular badge)",
+					"type": "boolean"
+				},
+				{
+					"slug": "sort_order",
+					"label": "Sort order",
+					"type": "integer"
+				}
+			]
+		},
+		{
+			"slug": "team",
+			"label": "Team",
+			"labelSingular": "Team Member",
+			"supports": ["drafts"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Name",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "role",
+					"label": "Role",
+					"type": "string"
+				},
+				{
+					"slug": "bio",
+					"label": "Short bio",
+					"type": "text"
+				},
+				{
+					"slug": "photo",
+					"label": "Photo",
+					"type": "image"
+				},
+				{
+					"slug": "sort_order",
+					"label": "Sort order",
+					"type": "integer"
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary Navigation",
+			"items": [
+				{ "type": "custom", "label": "Services", "url": "/services" },
+				{ "type": "custom", "label": "About", "url": "/about" },
+				{ "type": "custom", "label": "Contact", "url": "/contact" }
+			]
+		},
+		{
+			"name": "cta",
+			"label": "Header CTA (first item renders as the booking button)",
+			"items": [{ "type": "custom", "label": "Book a visit", "url": "/contact" }]
+		},
+		{
+			"name": "footer_services",
+			"label": "Footer: Services",
+			"items": [
+				{ "type": "custom", "label": "Signature Massage", "url": "/services/signature-massage" },
+				{ "type": "custom", "label": "Deep Tissue Massage", "url": "/services/deep-tissue-massage" },
+				{ "type": "custom", "label": "Custom Facial", "url": "/services/custom-facial" },
+				{ "type": "custom", "label": "All services", "url": "/services" }
+			]
+		},
+		{
+			"name": "footer_studio",
+			"label": "Footer: Studio",
+			"items": [
+				{ "type": "custom", "label": "About", "url": "/about" },
+				{ "type": "custom", "label": "Our team", "url": "/about#team" },
+				{ "type": "custom", "label": "Hours & directions", "url": "/contact#visit" },
+				{ "type": "custom", "label": "Book a visit", "url": "/contact" }
+			]
+		}
+	],
+	"content": {
+		"pages": [
+			{
+				"id": "home",
+				"slug": "home",
+				"status": "published",
+				"data": {
+					"title": "Home",
+					"content": [
+						{
+							"_type": "service.hero",
+							"_key": "hero",
+							"badge": "On Alder Street since 2019",
+							"headline": "An hour that's entirely yours",
+							"subheadline": "Juniper & Sage is a small massage and skin care studio in Southeast Portland. Three treatment rooms, no piped-in whale song, and therapists who ask before they adjust the pressure.",
+							"primaryCtaLabel": "Book a visit",
+							"primaryCtaUrl": "/contact",
+							"secondaryCtaLabel": "Browse services",
+							"secondaryCtaUrl": "/services",
+							"imageUrl": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1000&h=750&fit=crop",
+							"imageAlt": "A rolled grey towel, a white pump bottle, and pink tulips on a side table"
+						},
+						{
+							"_type": "service.services",
+							"_key": "services",
+							"headline": "What we do",
+							"subheadline": "Six treatments, done well. Every visit starts with a short conversation about what your body actually needs that day.",
+							"limit": 6,
+							"ctaLabel": "See details and pricing",
+							"ctaUrl": "/services"
+						},
+						{
+							"_type": "service.steps",
+							"_key": "how-it-works",
+							"headline": "Booking takes about a minute",
+							"steps": [
+								{
+									"title": "Choose a treatment",
+									"description": "Not sure which massage? Pick Signature and tell us more when you arrive — your therapist will tailor it."
+								},
+								{
+									"title": "Pick a time",
+									"description": "Evenings and weekends included. You'll get a confirmation right away and a reminder the day before."
+								},
+								{
+									"title": "Arrive and unwind",
+									"description": "Come ten minutes early for tea and an intake chat. The rest of the hour is yours."
+								}
+							]
+						},
+						{
+							"_type": "service.testimonials",
+							"_key": "testimonials",
+							"headline": "What clients say",
+							"testimonials": [
+								{
+									"quote": "I've been getting monthly massages for years and the intake conversation here is the first one that ever changed what happened on the table.",
+									"author": "Dana K.",
+									"detail": "Deep Tissue regular"
+								},
+								{
+									"quote": "The facial was calibrated to my very reactive skin instead of a set menu. No redness afterwards, which has literally never happened.",
+									"author": "Priya S.",
+									"detail": "Custom Facial"
+								},
+								{
+									"quote": "Quiet, unfussy, on time. I book the last slot on Thursdays and it's the only calendar item I protect.",
+									"author": "Marcus T.",
+									"detail": "Signature Massage, Thursdays"
+								}
+							]
+						},
+						{
+							"_type": "service.faq",
+							"_key": "faq",
+							"headline": "Common questions",
+							"items": [
+								{
+									"question": "What if I need to cancel?",
+									"answer": "Life happens. Cancel or reschedule up to 24 hours before your appointment at no charge. Inside 24 hours we charge half the service price, because the room and therapist were held for you."
+								},
+								{
+									"question": "What should I wear?",
+									"answer": "Whatever is comfortable. For massage you undress to your own comfort level — you're always draped, and your therapist will step out while you settle in."
+								},
+								{
+									"question": "Do you sell gift cards?",
+									"answer": "Yes, for any amount or any specific treatment. Ask at the front desk or mention it when you book and we'll have it ready to collect."
+								},
+								{
+									"question": "Is there parking?",
+									"answer": "Free street parking on Alder and the side streets is usually easy outside weekday lunch hours. We're also two blocks from the 15 bus."
+								}
+							]
+						},
+						{
+							"_type": "service.cta",
+							"_key": "book",
+							"headline": "Your week has room for this",
+							"subheadline": "Most first-time visitors book the Signature Massage. Sixty minutes, tailored on the day.",
+							"ctaLabel": "Book a visit",
+							"ctaUrl": "/contact"
+						}
+					]
+				}
+			},
+			{
+				"id": "about",
+				"slug": "about",
+				"status": "published",
+				"data": {
+					"title": "About",
+					"content": [
+						{
+							"_type": "service.hero",
+							"_key": "about-hero",
+							"headline": "Small on purpose",
+							"subheadline": "Three treatment rooms, four practitioners, and a booking calendar we keep deliberately un-crammed so nobody is rushed — including you.",
+							"centered": true
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Juniper & Sage opened in 2019 in a former florist's shop on Alder Street. We kept the good bones — tall windows, worn fir floors — and added what a bodywork studio actually needs: serious tables, real linen, and sound insulation that means you'll never hear the room next door."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "We schedule thirty minutes between appointments. That gap is the whole business model: your therapist has time to reset the room, wash up, and read your intake notes before you walk in. It means we see fewer clients per day than most studios. We think it's why they come back."
+								}
+							]
+						},
+						{
+							"_type": "service.team",
+							"_key": "team",
+							"headline": "The practitioners",
+							"subheadline": "Licensed, insured, and genuinely picky about continuing education."
+						},
+						{
+							"_type": "service.cta",
+							"_key": "about-book",
+							"headline": "Come see the space",
+							"subheadline": "First visit? Arrive ten minutes early and we'll show you around.",
+							"ctaLabel": "Book a visit",
+							"ctaUrl": "/contact"
+						}
+					]
+				}
+			},
+			{
+				"id": "contact",
+				"slug": "contact",
+				"status": "published",
+				"data": {
+					"title": "Contact",
+					"content": [
+						{
+							"_type": "service.hero",
+							"_key": "contact-hero",
+							"headline": "Book a visit",
+							"subheadline": "Call or email and we'll find you a time — usually within the week. Online booking is coming soon.",
+							"centered": true
+						},
+						{
+							"_type": "service.hours",
+							"_key": "visit",
+							"headline": "Hours & directions",
+							"hours": [
+								{ "label": "Mon – Fri", "value": "10am – 8pm" },
+								{ "label": "Saturday", "value": "9am – 6pm" },
+								{ "label": "Sunday", "value": "Closed" }
+							],
+							"phone": "(503) 555-0164",
+							"email": "hello@juniperandsage.example",
+							"address": "2117 SE Alder Street\nPortland, OR 97214",
+							"note": "Last appointments start one hour before close. Walk-ins are welcome when a room is free, but booking ahead is the safe bet."
+						},
+						{
+							"_type": "service.faq",
+							"_key": "contact-faq",
+							"headline": "Before your first visit",
+							"items": [
+								{
+									"question": "How early should I arrive?",
+									"answer": "Ten minutes for a first visit so we can walk through your intake form together. Returning clients can cut that to five."
+								},
+								{
+									"question": "Can I request a specific practitioner?",
+									"answer": "Absolutely — just mention a name when you book. If they're fully booked we'll offer the next best fit and say so honestly."
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"services": [
+			{
+				"id": "signature-massage",
+				"slug": "signature-massage",
+				"status": "published",
+				"data": {
+					"title": "Signature Massage",
+					"summary": "Our most-booked hour. Swedish-based, tailored on the day to whatever your body brings in.",
+					"price_from": "from $95",
+					"duration": "60 min",
+					"featured": true,
+					"sort_order": 1,
+					"image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1200&h=800&fit=crop",
+							"alt": "A therapist pouring massage oil into an open palm",
+							"filename": "signature-massage.jpg"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The Signature is a Swedish-based full-body massage that your therapist adapts in the moment: longer on the shoulders if that's where your week landed, lighter everywhere if what you need is to fall half-asleep. It starts with a two-minute conversation and ends with you deciding when to sit up."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Good to know" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Available in 60, 75, or 90 minute sessions. If you're deciding between this and Deep Tissue, book this one — your therapist can work deeper on request, but a Deep Tissue session can't easily become a relaxation hour."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "deep-tissue-massage",
+				"slug": "deep-tissue-massage",
+				"status": "published",
+				"data": {
+					"title": "Deep Tissue Massage",
+					"summary": "Slow, specific work on stubborn tension. For desk shoulders, runner's calves, and old knots with names.",
+					"price_from": "from $110",
+					"duration": "60 min",
+					"featured": true,
+					"sort_order": 2,
+					"image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=1200&h=800&fit=crop",
+							"alt": "Hands working along a client's upper back",
+							"filename": "deep-tissue.jpg"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Deep tissue is not about maximum pressure — it's about slow, deliberate work into the specific structures that are holding tension. Expect focused time on two or three areas rather than a full-body sweep, and expect your therapist to check in about pressure often. Sore the next day is normal; bruised is not, and we stay well on the right side of that line."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Good to know" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Drink water afterwards and skip the gym that evening. If you're training for something specific, tell your therapist — the plan changes if there's a race on Sunday."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "hot-stone-massage",
+				"slug": "hot-stone-massage",
+				"status": "published",
+				"data": {
+					"title": "Hot Stone Massage",
+					"summary": "Heated basalt stones do the warming so hands can do the work. Deep relaxation without deep pressure.",
+					"price_from": "from $125",
+					"duration": "75 min",
+					"featured": false,
+					"sort_order": 3,
+					"image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=1200&h=800&fit=crop",
+							"alt": "Warm basalt stones placed along a client's back",
+							"filename": "hot-stone.jpg"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Heat lets muscle release without force. Smooth basalt stones are warmed to just above body temperature, placed along the back and shoulders, then used in-hand for long, gliding strokes. The result reads as deep work, but the pressure stays moderate — which makes this the right choice when you want to feel thoroughly worked on without next-day soreness."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Good to know" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The 75 minutes includes the stone placement time, so hands-on time is comparable to our 60-minute sessions. Not recommended during pregnancy or with certain circulatory conditions — call us if you're unsure."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "custom-facial",
+				"slug": "custom-facial",
+				"status": "published",
+				"data": {
+					"title": "Custom Facial",
+					"summary": "An esthetician-led facial built from a skin consult, not a set menu. Sensitive skin welcome.",
+					"price_from": "from $105",
+					"duration": "60 min",
+					"featured": true,
+					"sort_order": 4,
+					"image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200&h=800&fit=crop",
+							"alt": "A client receiving a facial mask treatment",
+							"filename": "custom-facial.jpg"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Every facial here starts with your esthetician actually looking at your skin under a lamp and asking what it's been doing lately. The treatment is assembled from there — cleanse, exfoliation matched to your tolerance, extractions only if useful, a mask chosen on the spot, and SPF before you leave. Reactive and rosacea-prone skin is a specialty, not an exception."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Good to know" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Come with a bare face if you can. Skip retinoids for two days before, and plan nothing photographed for the rest of the day if extractions are likely."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "aromatherapy-ritual",
+				"slug": "aromatherapy-ritual",
+				"status": "published",
+				"data": {
+					"title": "Aromatherapy Ritual",
+					"summary": "A gentler, slower session built around essential oil blends you choose at the start.",
+					"price_from": "from $85",
+					"duration": "45 min",
+					"featured": false,
+					"sort_order": 5,
+					"image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=1200&h=800&fit=crop",
+							"alt": "Hands holding a small amber bottle of essential oil",
+							"filename": "aromatherapy.jpg"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "The session opens with three blends on smelling strips; the one you keep reaching for is the one we use. From there it's slow, rhythmic bodywork — more about the nervous system than the muscles. People book this before big weeks, after hard news, and on the anniversary of things."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Good to know" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "All blends are diluted for direct skin contact and free of the common irritants. Tell us about fragrance sensitivities when you book and we'll set aside unscented carrier oil as a fallback."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "private-yoga",
+				"slug": "private-yoga",
+				"status": "published",
+				"data": {
+					"title": "Private Yoga Session",
+					"summary": "One-on-one movement work in our back studio. Good before a massage, better as a habit.",
+					"price_from": "from $70",
+					"duration": "60 min",
+					"featured": false,
+					"sort_order": 6,
+					"image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&h=800&fit=crop",
+							"alt": "A person seated in meditation at sunrise",
+							"filename": "private-yoga.jpg"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Not a class — an hour with a teacher who watches how you actually move and builds from there. Most clients use it one of two ways: as mobility work that makes their massage results last longer, or as a private on-ramp to a public class they've been avoiding."
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Good to know" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Mats and props are provided. Wear anything you can move in. Pairs well booked back-to-back with a Signature Massage — mention it and we'll schedule the rooms accordingly."
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"team": [
+			{
+				"id": "maya-torres",
+				"slug": "maya-torres",
+				"status": "published",
+				"data": {
+					"title": "Maya Torres",
+					"role": "Founder & Lead Therapist",
+					"bio": "LMT since 2011. Trained in Swedish, deep tissue, and prenatal massage; the one who insists on the thirty-minute gaps between appointments.",
+					"sort_order": 1,
+					"photo": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=600&fit=crop",
+							"alt": "Maya Torres smiling in a striped jacket",
+							"filename": "maya-torres.jpg"
+						}
+					}
+				}
+			},
+			{
+				"id": "alana-reyes",
+				"slug": "alana-reyes",
+				"status": "published",
+				"data": {
+					"title": "Alana Reyes",
+					"role": "Esthetician",
+					"bio": "Ten years in clinical skin care before going independent. Builds every facial from a consult and keeps meticulous notes between visits.",
+					"sort_order": 2,
+					"photo": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&h=600&fit=crop",
+							"alt": "Alana Reyes in teal scrubs with arms crossed",
+							"filename": "alana-reyes.jpg"
+						}
+					}
+				}
+			},
+			{
+				"id": "sam-whitfield",
+				"slug": "sam-whitfield",
+				"status": "published",
+				"data": {
+					"title": "Sam Whitfield",
+					"role": "Massage Therapist",
+					"bio": "Former physical therapy assistant, which shows in his deep tissue work. Ask him about the difference between sore and injured — he has a whole speech.",
+					"sort_order": 3,
+					"photo": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=600&fit=crop",
+							"alt": "Sam Whitfield in a dark green polo shirt",
+							"filename": "sam-whitfield.jpg"
+						}
+					}
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,40 @@
+---
+/**
+ * Custom Portable Text renderer for service blocks.
+ *
+ * Maps custom block types (service.hero, service.services, etc.) to their
+ * corresponding Astro components. Standard Portable Text (paragraphs,
+ * headings, lists) renders with the default components, so pages can mix
+ * prose and sections freely.
+ */
+import type { PortableTextBlock } from "emdash";
+import { PortableText } from "emdash/ui";
+import Hero from "./blocks/Hero.astro";
+import Services from "./blocks/Services.astro";
+import Steps from "./blocks/Steps.astro";
+import Testimonials from "./blocks/Testimonials.astro";
+import Team from "./blocks/Team.astro";
+import Hours from "./blocks/Hours.astro";
+import FAQ from "./blocks/FAQ.astro";
+import CTABanner from "./blocks/CTABanner.astro";
+
+interface Props {
+	value: PortableTextBlock[];
+}
+
+const { value } = Astro.props;
+
+// Custom block type components
+const serviceTypes = {
+	"service.hero": Hero,
+	"service.services": Services,
+	"service.steps": Steps,
+	"service.testimonials": Testimonials,
+	"service.team": Team,
+	"service.hours": Hours,
+	"service.faq": FAQ,
+	"service.cta": CTABanner,
+};
+---
+
+<PortableText value={value} components={{ type: serviceTypes }} />

@@ -1,0 +1,94 @@
+---
+/**
+ * Team grid. Like the services block, this is a placement marker -- the
+ * people come from the `team` collection.
+ */
+import { getEmDashCollection } from "emdash";
+import { Image } from "emdash/ui";
+
+interface Props {
+	node: {
+		_key?: string;
+		headline?: string;
+		subheadline?: string;
+	};
+}
+
+const { node } = Astro.props;
+const { _key, headline, subheadline } = node;
+
+const { entries: people, cacheHint } = await getEmDashCollection("team", {
+	status: "published",
+	orderBy: { sort_order: "asc" },
+});
+
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+---
+
+<section class="team section" id={_key}>
+	<div class="container">
+		{(headline || subheadline) && (
+			<header class="section-header">
+				{headline && <h2 class="section-headline">{headline}</h2>}
+				{subheadline && <p class="section-subheadline">{subheadline}</p>}
+			</header>
+		)}
+		<div class="team-grid">
+			{people.map((person) => (
+				<div class="team-card">
+					{person.data.photo && (
+						<div class="team-photo">
+							<Image image={person.data.photo} />
+						</div>
+					)}
+					<h3 class="team-name">{person.data.title}</h3>
+					{person.data.role && <p class="team-role">{person.data.role}</p>}
+					{person.data.bio && <p class="team-bio">{person.data.bio}</p>}
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.team-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: var(--spacing-xl);
+		max-width: 960px;
+		margin: 0 auto;
+	}
+
+	.team-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: var(--spacing-sm);
+	}
+
+	.team-photo :global(img) {
+		width: 160px;
+		height: 160px;
+		object-fit: cover;
+		border-radius: var(--radius-full);
+		box-shadow: var(--shadow);
+		margin-bottom: var(--spacing-sm);
+	}
+
+	.team-name {
+		font-size: var(--font-size-lg);
+	}
+
+	.team-role {
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+		color: var(--color-brand);
+	}
+
+	.team-bio {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		line-height: var(--leading-normal);
+	}
+</style>

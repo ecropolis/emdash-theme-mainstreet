@@ -1,0 +1,35 @@
+/*
+  theme.css -- your theme overrides. This is the file to edit to
+  retheme the site.
+
+  Every design token lives in src/styles/tokens.css (colors, gradients,
+  type scale, spacing, layout, shadows) with its default value. Override
+  any of them here: declarations in this file are unlayered, so they
+  always beat the @layer base defaults in tokens.css.
+
+  Colors are defined with light-dark(). Overriding with a plain color
+  changes light and dark mode at once; use light-dark(<light>, <dark>)
+  to set different values per mode.
+
+  Rebranding usually only needs --color-brand-* and --color-accent-* --
+  the gradient tokens follow automatically. For a flat, gradient-free
+  brand, set the --gradient-* tokens to solid colors.
+
+  Webfonts are loaded in astro.config.mjs (--font-body). Swap the loaded
+  font there; use overrides here for system fonts or a separate heading
+  face.
+
+  Mainstreet ships with a calm sage-teal and warm amber pairing and a
+  slightly softer display weight than the SaaS-style templates. Swap
+  these for the business's colors and you're most of the way to a
+  rebrand.
+*/
+
+:root {
+	--color-brand: light-dark(#0f766e, #2dd4bf);
+	--color-brand-strong: light-dark(#115e59, #14b8a6);
+	--color-brand-soft: light-dark(#14b8a6, #5eead4);
+	--color-accent: #d97706;
+	--color-accent-soft: #fbbf24;
+	--font-weight-display: 700;
+}

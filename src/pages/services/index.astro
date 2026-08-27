@@ -1,0 +1,152 @@
+---
+import { getEmDashCollection } from "emdash";
+import { Image } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+
+const { entries: services, cacheHint } = await getEmDashCollection("services", {
+	status: "published",
+	orderBy: { sort_order: "asc" },
+});
+
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+---
+
+<Base title="Services" description="Browse every service we offer, with pricing and durations.">
+	<div class="container">
+		<header class="archive-header">
+			<h1>Services</h1>
+			<p>Every treatment we offer. Pick one to see details and book.</p>
+		</header>
+		<div class="services-grid">
+			{services.map((service) => (
+				<a href={`/services/${service.id}`} class="service-card">
+					{service.data.image && (
+						<div class="service-image">
+							<Image image={service.data.image} />
+						</div>
+					)}
+					<div class="service-body">
+						{!!service.data.featured && <span class="service-flag">Popular</span>}
+						<h2 class="service-title">{service.data.title}</h2>
+						{service.data.summary && <p class="service-summary">{service.data.summary}</p>}
+						<div class="service-meta">
+							{service.data.price_from && <span class="service-price">{service.data.price_from}</span>}
+							{service.data.duration && <span class="service-duration">{service.data.duration}</span>}
+						</div>
+					</div>
+				</a>
+			))}
+		</div>
+	</div>
+</Base>
+
+<style>
+	.archive-header {
+		text-align: center;
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-2xl);
+	}
+
+	.archive-header p {
+		margin-top: var(--spacing-md);
+		font-size: var(--font-size-lg);
+		color: var(--color-muted);
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--spacing-xl);
+		padding-bottom: var(--spacing-4xl);
+	}
+
+	.service-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+		transition:
+			transform var(--transition-base),
+			box-shadow var(--transition-base),
+			border-color var(--transition-base);
+	}
+
+	.service-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-lg);
+		border-color: var(--color-brand-soft);
+	}
+
+	.service-image :global(img) {
+		width: 100%;
+		aspect-ratio: 3 / 2;
+		object-fit: cover;
+	}
+
+	.service-body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-sm);
+		padding: var(--spacing-lg);
+		flex: 1;
+	}
+
+	.service-flag {
+		position: absolute;
+		top: var(--spacing-md);
+		right: var(--spacing-md);
+		font-size: var(--font-size-xs);
+		font-weight: 600;
+		color: var(--color-on-brand);
+		background: var(--gradient-brand);
+		padding: var(--spacing-xs) var(--spacing-sm);
+		border-radius: var(--radius-full);
+		box-shadow: var(--shadow);
+	}
+
+	.service-title {
+		font-size: var(--font-size-lg);
+	}
+
+	.service-summary {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		line-height: var(--leading-normal);
+		flex: 1;
+	}
+
+	.service-meta {
+		display: flex;
+		align-items: baseline;
+		gap: var(--spacing-md);
+		margin-top: var(--spacing-sm);
+	}
+
+	.service-price {
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-heading);
+		letter-spacing: var(--tracking-tight);
+		color: var(--color-brand);
+	}
+
+	.service-duration {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+	}
+
+	@media (max-width: 900px) {
+		.services-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.services-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
