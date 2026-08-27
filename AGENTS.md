@@ -98,6 +98,10 @@ Gradients follow the brand/accent pair automatically (see `tokens.css`). Cards a
 
 The theme bundles `@ecropolis/emdash-plugin-compass-forms` (registered as `compassForms()` in astro.config.mjs): a `compass.form` Portable Text block editors insert from the slash menu. Submissions are stored in plugin storage, listed under **Admin → Form Submissions**, optionally emailed (`Plugins → Compass Forms → Settings`), with honeypot + min-fill-time spam checks. The block renders the Compass `cfh-` markup contract; the theme's token-mapped styles for it live in `src/styles/forms.css`. A Compass client key on a block switches it to the hosted forms.compass.st embed. The seeded contact page carries one form block (`formKey: contact`).
 
+## Compass Mail
+
+The theme also bundles `@ecropolis/emdash-plugin-compass-mail` (`compassMail()` in astro.config.mjs) — a standard-format email transport registering the exclusive `email:deliver` hook, sending via SendGrid or Resend with a bring-your-own API key. Configure under **Plugins → Compass Mail → Settings** (provider, API key, verified from-address), then select it under **Settings → Email**. Until it's configured and selected, `ctx.email.send()` has no production provider and form notification emails are skipped (submissions are still stored).
+
 ## Compass Customizer
 
 The theme ships a second local plugin, `src/plugins/compass-customizer/`, giving no-code design control from **Admin → Design**: palette presets, brand/accent colors, typeface, corner roundness, headline weight, gradients on/off, custom CSS. It stores settings in plugin KV and injects an `html:root` token-override `<style>` into public pages via the trusted-only `page:fragments` hook — changes apply on next page load, no rebuild. See `src/plugins/compass-customizer/README.md` for architecture and EmDash gotchas, and `docs/TOKEN-CONTRACT.md` for the token contract it writes against.

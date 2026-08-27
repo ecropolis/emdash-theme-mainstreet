@@ -5,6 +5,7 @@ import icon from "astro-iconset";
 import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
 import compassForms from "@ecropolis/emdash-plugin-compass-forms";
+import compassMail from "@ecropolis/emdash-plugin-compass-mail";
 
 export default defineConfig({
 	output: "server",
@@ -67,6 +68,7 @@ export default defineConfig({
 					entrypoint: new URL("./src/plugins/service-blocks/index.ts", import.meta.url).href,
 				},
 				compassForms(),
+				compassMail(),
 				{
 					id: "compass-customizer",
 					version: "0.2.0",

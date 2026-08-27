@@ -21,6 +21,7 @@ Services are real content entries with pricing, duration, and images — not han
 - **Eight content blocks** editors can compose in any order on any page.
 - **Compass Customizer** — no-code design controls in **Admin → Design**: palette presets, brand colors, typeface, corner roundness, gradients, custom CSS. Changes apply live, no rebuild. Built on the theme's [token contract](docs/TOKEN-CONTRACT.md).
 - **Compass Forms** — the [`@ecropolis/emdash-plugin-compass-forms`](https://github.com/ecropolis/emdash-plugin-compass-forms) plugin comes wired in: an editor-insertable form block with stored submissions, an admin submissions page, email notification, and spam basics. The demo contact page ships with one.
+- **Compass Mail** — [`@ecropolis/emdash-plugin-compass-mail`](https://github.com/ecropolis/emdash-plugin-compass-mail) is bundled too: EmDash's missing email transport. Add a SendGrid or Resend API key, select it under Settings → Email, and auth emails plus form notifications deliver for real.
 - **Menu-driven booking CTA** in the header — editors change the label and URL from the admin (`cta` menu), no code.
 - Dark/light mode, SEO metadata, and demo content for a fictional wellness studio so the theme looks real out of the box.
 
