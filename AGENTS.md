@@ -94,9 +94,15 @@ Typography is **Plus Jakarta Sans** on `--font-body`, display weight 700 (calmer
 
 Gradients follow the brand/accent pair automatically (see `tokens.css`). Cards are surface-on-bg with 1px borders; the Popular badge and price text carry the brand color.
 
-## Customisation
+## Compass Customizer
 
-Design tokens live in `src/styles/tokens.css` with their default values; override them in `src/styles/theme.css` (unlayered, always wins). Don't edit `tokens.css` or `Base.astro` for visual changes.
+The theme ships a second local plugin, `src/plugins/compass-customizer/`, giving no-code design control from **Admin → Design**: palette presets, brand/accent colors, typeface, corner roundness, headline weight, gradients on/off, custom CSS. It stores settings in plugin KV and injects an `html:root` token-override `<style>` into public pages via the trusted-only `page:fragments` hook — changes apply on next page load, no rebuild. See `src/plugins/compass-customizer/README.md` for architecture and EmDash gotchas, and `docs/TOKEN-CONTRACT.md` for the token contract it writes against.
+
+Override precedence is deterministic: `tokens.css` (`@layer base`) < `theme.css` (unlayered `:root`) < customizer (`html:root`). Never add higher-specificity token declarations in the theme, or the customizer breaks.
+
+## Customisation (in code)
+
+Design tokens live in `src/styles/tokens.css` with their default values; override them in `src/styles/theme.css` (unlayered, always wins over tokens.css). Don't edit `tokens.css` or `Base.astro` for visual changes. Code-level overrides define the theme's shipped identity; site owners restyle per-site with the customizer instead.
 
 To re-brand for a real business, the highest-leverage moves are:
 

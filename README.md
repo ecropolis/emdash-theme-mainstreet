@@ -9,6 +9,7 @@ Services are real content entries with pricing, duration, and images — not han
 - **Services collection** — name, summary, rich description, image, price, duration, featured flag, sort order. Rendered as a grid block, an archive at `/services`, and detail pages at `/services/{slug}`.
 - **Team collection** — name, role, bio, photo. Rendered by the team block.
 - **Eight content blocks** editors can compose in any order on any page.
+- **Compass Customizer** — no-code design controls in **Admin → Design**: palette presets, brand colors, typeface, corner roundness, gradients, custom CSS. Changes apply live, no rebuild. Built on the theme's [token contract](docs/TOKEN-CONTRACT.md).
 - **Menu-driven booking CTA** in the header — editors change the label and URL from the admin (`cta` menu), no code.
 - Dark/light mode, SEO metadata, and demo content for a fictional wellness studio so the theme looks real out of the box.
 

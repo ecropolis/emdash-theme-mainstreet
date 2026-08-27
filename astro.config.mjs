@@ -52,6 +52,15 @@ export default defineConfig({
 					// the virtual module has no on-disk location to anchor them).
 					entrypoint: new URL("./src/plugins/service-blocks/index.ts", import.meta.url).href,
 				},
+				{
+					id: "compass-customizer",
+					version: "0.1.0",
+					entrypoint: new URL("./src/plugins/compass-customizer/index.ts", import.meta.url).href,
+					// Trusted-only hook: injects the design-token override
+					// <style> into public pages.
+					capabilities: ["hooks.page-fragments:register"],
+					adminPages: [{ path: "/design", label: "Design", icon: "palette" }],
+				},
 			],
 		}),
 	],
